@@ -171,6 +171,9 @@ inherits slurm
       override_options => {
         'mysqld' => {
           'bind-address' => $bind_setting,
+        } + $dbdatadir ? {
+          undef => {},
+          default => { 'datadir' => $dbdatadir}
         },
       },
     }
