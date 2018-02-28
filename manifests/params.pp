@@ -441,8 +441,8 @@ $build_without = [
 #$rpm_basename = 'slurm'
 $common_rpms_basename = [
   'slurm',           # Main RPM basename covering slurmd and slurmctld
-  'slurm-slurmctld'
-  'slurm-slurmd'
+  'slurm-slurmctld',
+  'slurm-slurmd',
   'slurm-contribs',  # Perl tool to print Slurm job state information
   'slurm-devel',     # Development package for Slurm
   #'slurm-lua',       # Slurm lua bindings
