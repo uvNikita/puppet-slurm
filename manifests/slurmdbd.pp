@@ -170,12 +170,12 @@ inherits slurm
     }
     class { '::mysql::server':
       override_options => {
-        'mysqld' => {
+        'mysqld' => merge({
           'bind-address' => $bind_setting,
-        } + $dbdatadir ? {
+        }, $dbdatadir ? {
           undef => {},
-          default => { 'datadir' => $dbdatadir}
-        },
+          default => { 'datadir' => $dbdatadir }
+        }),
       },
     }
 
