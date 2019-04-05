@@ -112,7 +112,10 @@ define slurm::install::packages(
 
   case $::osfamily {
     'Redhat': {
-      include ::epel
+      if $slurm::manage_epel {
+        include ::epel
+      }
+
       include ::yum
       $rpms   = suffix($pkgs, '*.rpm')
       $cwddir = "${pkgdir}/RPMS/${::architecture}"
