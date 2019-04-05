@@ -9,14 +9,17 @@
 # Specialization class for Redhat systems
 class slurm::common::redhat inherits slurm::common {
 
-  include ::epel
   include ::yum
   include ::selinux
 
   yum::group { $slurm::params::groupinstall:
     ensure  => 'present',
     timeout => 600,
-    require => Class['::epel'],
+  }
+
+  if $slurm::manage_epel {
+    include ::epel
+    Yum::Group[$slurm::params::groupinstall] -> Class['::epel']
   }
 
   # Resource default statements

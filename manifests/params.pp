@@ -57,6 +57,8 @@ class slurm::params {
   $manage_firewall   = false
   # Whether or not this module should manage the accounting
   $manage_accounting = false
+  # Whether or not this module should manage epel
+  $manage_epel = true
 
   # Configuration directory & file
   $configdir = $::operatingsystem ? {
