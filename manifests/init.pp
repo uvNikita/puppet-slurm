@@ -450,6 +450,7 @@ class slurm(
   Boolean $manage_firewall                = $slurm::params::manage_firewall,
   Boolean $manage_munge                   = $slurm::params::manage_munge,
   Boolean $manage_pam                     = $slurm::params::manage_pam,
+  Boolean $manage_epel                    = $slurm::params::manage_epel,
   Boolean $service_manage                 = $slurm::params::service_manage,
   Integer $uid                            = $slurm::params::uid,
   Integer $gid                            = $slurm::params::gid,

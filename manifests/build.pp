@@ -73,16 +73,18 @@ define slurm::build(
 
   case $::osfamily {
     'Redhat': {
-      include ::epel
       include ::yum
       if !defined(Yum::Group[$slurm::params::groupinstall]) {
         yum::group { $slurm::params::groupinstall:
           ensure  => 'present',
           timeout => 600,
-          require => Class['::epel'],
         }
       }
       Yum::Group[$slurm::params::groupinstall] -> Exec[$buildname]
+      if $slurm::manage_epel {
+        include ::epel
+        Yum::Group[$slurm::params::groupinstall] -> Class['::epel']
+      }
 
       $rpmdir = "${dir}/RPMS/${::architecture}"
       $rpms   = prefix(suffix(concat($slurm::params::common_rpms_basename, $slurm::params::slurmdbd_rpms_basename), "-${version}*.rpm"), "${rpmdir}/")
