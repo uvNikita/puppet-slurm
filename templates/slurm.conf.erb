@@ -132,10 +132,22 @@ JobCompLoc=<%= scope['slurm::jobcomploc'] %>
 JobCompType=jobcomp/<%= scope['slurm::jobcomptype'] %>
 #JobCompUser=
 #JobContainerType=job_container/<%= scope['slurm::jobcontainertype'] %>
+
 SlurmctldDebug=<%= scope['slurm::slurmctlddebug'] %>
+
+<% if scope['slurm::params::logdir'].nil? -%>
+#SlurmctldLogFile=
+<% else %>
 SlurmctldLogFile=<%= scope['slurm::params::logdir'] %>/slurmctld.log
+<% end -%>
+
 SlurmdDebug=<%= scope['slurm::slurmddebug'] %>
+
+<% if scope['slurm::params::logdir'].nil? -%>
+#SlurmdLogFile=
+<% else %>
 SlurmdLogFile=<%= scope['slurm::params::logdir'] %>/slurmd.log
+<% end -%>
 
 <% if scope['slurm::slurmddebugsyslog'].empty? -%>
 #SlurmdSyslogDebug=

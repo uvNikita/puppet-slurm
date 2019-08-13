@@ -65,7 +65,7 @@ class slurm::params {
     default => '/etc/slurm',
   }
   $logdir = $::operatingsystem ? {
-    default => '/var/log/slurm'
+    default => undef
   }
   # $piddir = $::operatingsystem ? {
     #   default => '/var/run/slurm',

@@ -29,7 +29,12 @@ DebugLevel=<%= scope['slurm::slurmdbd::debuglevel'] %>
 <% else -%>
 DebugFlags=<%= scope['slurm::slurmdbd::debugflags'].join(',') %>
 <% end -%>
+
+<% if scope['slurm::params::logdir'].nil? -%>
+#LogFile=
+<% else %>
 LogFile=<%= scope['slurm::logdir'] %>/slurmdbd.log
+<% end -%>
 
 <% if scope['slurm::slurmdbddebugsyslog'].empty? -%>
 #DebugLevelSyslog=
