@@ -58,12 +58,6 @@
 #          Do we perform the install of the Slurm packages or not?
 # @param wrappers                 [Array]       Default: [ 'slurm-openlava',  'slurm-torque' ]
 #          Extra wrappers/package to install (ex: openlava/LSF wrapper, Torque/PBS wrappers)
-# @param src_archived             [Boolean]     Default: false
-#          Whether the sources tar.bz2 has been archived or not.
-#          Thus by default, it is assumed that the provided version is the
-#          latest version (from https://www.schedmd.com/downloads/latest/).
-#          If set to true, the sources will be download from
-#             https://www.schedmd.com/downloads/archive/
 # @param src_checksum             [String]      Default: ''
 #           archive file checksum (match checksum_type)
 # @param src_checksum_type        [String]      Default: 'md5'
@@ -138,7 +132,7 @@
 #           0 = unlimited
 # @param jobacctgathertype        [String]      Default: 'cgroup'
 #           Elligible values in [ "linux", "cgroup", "none"]
-# @param jobacctgatherfrequency   [Integer]     Default: 30
+# @param jobacctgatherfrequency   Variant[String,Integer] Default: 30
 # @param jobacctgatherparams      [String]      Default: ''
 #           Elligible values in [ 'NoShared', 'UsePss', 'NoOverMemoryKill']
 # @param jobcheckpointdir         [String]      Default: ''
@@ -225,6 +219,7 @@
 # @param suspendexcnodes          [String]      Default: ''
 # @param suspendexcparts          [String]      Default: ''
 # @param resumerate               [Integer]     Default: 300
+# @param acctgatherprofiletype    [String]      Default: 'acct_gather_profile/none'
 # @param returntoservice          [Integer]     Default: 1
 #           Elligible values in [0, 1, 2]
 # @param statesavelocation        [String]      Default: '/var/lib/slurmctld'
@@ -462,7 +457,6 @@ class slurm(
   # Slurm source building
   Boolean $do_build                       = $slurm::params::do_build,
   Boolean $do_package_install             = $slurm::params::do_package_install,
-  Boolean $src_archived                   = $slurm::params::src_archived,
   String  $src_checksum                   = $slurm::params::src_checksum,
   String  $src_checksum_type              = $slurm::params::src_checksum_type,
   String  $srcdir                         = $slurm::params::srcdir,
@@ -510,7 +504,7 @@ class slurm(
   String  $healthcheckprogram             = $slurm::params::healthcheckprogram,
   Integer $inactivelimit                  = $slurm::params::inactivelimit,
   String  $jobacctgathertype              = $slurm::params::jobacctgathertype,
-  Integer $jobacctgatherfrequency         = $slurm::params::jobacctgatherfrequency,
+  Variant[String,Integer]  $jobacctgatherfrequency         = $slurm::params::jobacctgatherfrequency,
   String  $jobacctgatherparams            = $slurm::params::jobacctgatherparams,
   String  $jobcheckpointdir               = $slurm::params::jobcheckpointdir,
   String  $jobcomphost                    = $slurm::params::jobcomphost,
@@ -566,6 +560,7 @@ class slurm(
   String  $suspendexcnodes                = $slurm::params::suspendexcnodes,
   String  $suspendexcparts                = $slurm::params::suspendexcparts,
   Integer $resumerate                     = $slurm::params::resumerate,
+  String  $acctgatherprofiletype          = $slurm::params::acctgatherprofiletype,
   Integer $returntoservice                = $slurm::params::returntoservice,
   String  $statesavelocation              = $slurm::params::statesavelocation,
   String  $schedulertype                  = $slurm::params::schedulertype,

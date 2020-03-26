@@ -237,6 +237,7 @@ $suspendtime             = 0
 $suspendexcnodes         = ''
 $suspendexcparts         = ''
 $resumerate              = 300
+$acctgatherprofiletype   = 'acct_gather_profile/none'
 # Controls when a DOWN node will be returned to service
 $returntoservice         = 1  # in [0, 1, 2]
 $statesavelocation       = '/var/lib/slurmctld'
@@ -324,8 +325,9 @@ $qos        = {}
   # }
 $cgroup_configfile = 'cgroup.conf'
 $cgroup_automount  = true
-$cgroup_mountpoint = $::operatingsystem ? {
-  default          => '/sys/fs/cgroup'
+$cgroup_mountpoint = $::facts.dig('os', 'release', 'major') ? {
+  '6'     => '/cgroup',
+  default => '/sys/fs/cgroup',
 }
 ### task/cgroup plugin ###
 $cgroup_alloweddevices            = []    # if non-empty, cgroup_allowed_devices_file.conf
@@ -417,15 +419,10 @@ $version = '17.11.12'
 $src_checksum      = '94fb13b509d23fcf9733018d6c961ca9'
 $src_checksum_type = 'md5'
 # From where the Slurm sources can be downloaded
-$download_baseurl    = 'https://www.schedmd.com/downloads'
-$download_latestdir  = 'latest'
-$download_archivedir = 'archive'
-# Whether the remote source archive has been already archived  - this
-# unfortunately changes the URL to download from
+$download_baseurl    = 'https://download.schedmd.com/slurm/'
 
 $do_build            = true
 $do_package_install  = true
-$src_archived        = false
 # Where to place the sources
 $srcdir = $::operatingsystem ? {
   default => '/usr/local/src'
