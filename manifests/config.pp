@@ -27,7 +27,7 @@ class slurm::config {
     $slurm::configdir,
     #$slurm::params::piddir,  # NO support for specialized piddir as per service definitions
     # $pluginsdir,
-  ] + ($slurm::params::logdir ? { undef => [], default => [ $slurm::params::logdir ] })
+  ] + ($slurm::logdir ? { undef => [], default => [ $slurm::logdir ] })
  if $slurm::ensure == 'present' {
     file { $slurmdirs:
       ensure => 'directory',

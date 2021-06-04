@@ -516,6 +516,7 @@ class slurm(
   Boolean $with_slurmctld                 = $slurm::params::with_slurmctld,
   Boolean $with_slurmdbd                  = $slurm::params::with_slurmdbd,
   Array   $wrappers                       = $slurm::params::wrappers,
+  String  $logdir                         = $slurm::params::logdir,
   # Slurm source building
   Boolean $do_build                       = $slurm::params::do_build,
   Boolean $do_package_install             = $slurm::params::do_package_install,
