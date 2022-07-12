@@ -143,6 +143,7 @@ class slurm::params {
   # Accounting storage slurmdbd server
   $accountingstoragehost   = $::hostname
   $accountingstorageexternalhost = []
+  $accountingstoreflags = []
   # Authentication method for communications between Slurm components.
   $authtype                = 'munge' # in [ 'none', 'munge' ]
   $authinfo                = ''
