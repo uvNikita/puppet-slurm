@@ -26,21 +26,39 @@ class slurm::params {
   #### MODULE INTERNAL VARIABLES  #########
   # (Modify to adapt to unsupported OSes)
   #########################################
-  $pre_requisite_packages = $::osfamily ? {
-    'Redhat' => [
-      'hwloc', 'hwloc-devel', 'hwloc-plugins', 'numactl', 'numactl-devel',
-      'http-parser-devel', 'json-c-devel',
-      'lua', 'lua-devel',
-      'mysql-devel',
-      'openssl', 'openssl-devel',
-      'pam-devel',
-      'perl-devel', 'perl-CPAN',
-      'readline', 'readline-devel',
-      'libX11-devel',
-      'libssh2-devel',
-      'libevent-devel',
-      'python3',
-    ],
+  $pre_requisite_packages = $facts['os']['family'] ? {
+    'Redhat' => $facts['os']['release']['major'] ? {
+      '9' => [
+        'hwloc', 'hwloc-devel', 'numactl', 'numactl-devel',
+        'http-parser-devel', 'json-c-devel',
+        'lua', 'lua-devel',
+        'mysql-devel',
+        'openssl', 'openssl-devel',
+        'pam-devel',
+        'perl-devel', 'perl-CPAN',
+        'readline', 'readline-devel',
+        'libX11-devel',
+        'libssh2-devel',
+        'libevent-devel',
+        'python3',
+      ],
+
+      default => [
+        'hwloc', 'hwloc-devel', 'hwloc-plugins', 'numactl', 'numactl-devel',
+        'http-parser-devel', 'json-c-devel',
+        'lua', 'lua-devel',
+        'mysql-devel',
+        'openssl', 'openssl-devel',
+        'pam-devel',
+        'perl-devel', 'perl-CPAN',
+        'readline', 'readline-devel',
+        'libX11-devel',
+        'libssh2-devel',
+        'libevent-devel',
+        'python3',
+      ]
+    },
+
     default => []
   }
 
