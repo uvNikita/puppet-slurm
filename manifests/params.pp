@@ -40,7 +40,7 @@ class slurm::params {
         'libX11-devel',
         'libssh2-devel',
         'libevent-devel',
-        'python3',
+        'python3', 'python3-devel',
       ],
 
       default => [
@@ -55,7 +55,7 @@ class slurm::params {
         'libX11-devel',
         'libssh2-devel',
         'libevent-devel',
-        'python3',
+        'python3', 'python3-devel',
       ]
     },
 
@@ -576,7 +576,7 @@ class slurm::params {
   }
   $munge_extra_packages = $::operatingsystem ? {
     /(?i-mx:ubuntu|debian)/        => [ 'libmunge-dev' ],
-    /(?i-mx:centos|fedora|redhat)/ => [ 'munge-devel', 'munge-libs' ],
+    /(?i-mx:centos|fedora|redhat|rocky)/ => [ 'munge-devel', 'munge-libs' ],
     default => [],
   }
 
