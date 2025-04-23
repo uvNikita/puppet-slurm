@@ -38,7 +38,7 @@
 #        builddir => "/root/rpmbuild/",
 #     }
 #
-class slurm::pmix(
+class slurm::pmix (
   String  $ensure             = $slurm::params::ensure,
   String  $version            = $slurm::params::pmix_version,
   String  $srcdir             = $slurm::params::srcdir,
@@ -48,7 +48,7 @@ class slurm::pmix(
   Boolean $do_build           = $slurm::params::do_build,
   Boolean $do_package_install = $slurm::params::do_package_install,
 ) {
-  include ::slurm::params
+  include slurm::params
 
   # Download the PMIx sources
   slurm::pmix::download { $version :
@@ -76,5 +76,4 @@ class slurm::pmix(
       require  => Slurm::Pmix::Build[$version],
     }
   }
-
 }

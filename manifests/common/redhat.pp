@@ -8,9 +8,8 @@
 #
 # Specialization class for Redhat systems
 class slurm::common::redhat inherits slurm::common {
-
-  include ::yum
-  include ::selinux
+  include yum
+  include selinux
 
   if $slurm::do_build {
     yum::group { $slurm::params::groupinstall:
@@ -19,8 +18,8 @@ class slurm::common::redhat inherits slurm::common {
     }
 
     if $slurm::manage_epel {
-      include ::epel
-      Yum::Group[$slurm::params::groupinstall] -> Class['::epel']
+      include epel
+      Yum::Group[$slurm::params::groupinstall] -> Class['epel']
     }
 
     # Resource default statements
@@ -30,7 +29,6 @@ class slurm::common::redhat inherits slurm::common {
   }
 
   if $slurm::manage_firewall and versioncmp($facts['os']['release']['major'], '7') >= 0 {
-    include ::firewalld
+    include firewalld
   }
-
 }
