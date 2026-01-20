@@ -216,7 +216,7 @@ inherits slurm {
     }
     class { 'mysql::server':
       override_options => {
-        'mysqld' => merge({
+        'mysqld' => stdlib::merge({
           'bind-address' => $bind_setting,
           # Buffer Pool Size: 256MB + 256 * log2(RAM size in GB)
           'innodb_buffer_pool_size'  => $innodb_buffer_pool_size,
